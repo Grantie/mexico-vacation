@@ -1,63 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--     <link rel="icon" href="https://glitch.com/favicon.ico" /> -->
 
-    <title>Mexico Vacation</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+  <title>Mexico Vacation</title>
 
-    <link rel="stylesheet" href="/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+  <link rel="stylesheet" href="/style.css" />
 
-    <link rel="stylesheet" href="/timeTo.css" />
-    <script src="/jquery.time-to.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
 
-    <script src="/script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Mexico Vacation</h1>
-      <p>
-        In 2024, we went on a vacation to Mexico. Lots of it was filmed, and
-        Grant put it into one long movie.
-      </p>
-      <p>
-        The full movie will be released on April 1, 2024, at 7 pm pdt.
-      </p>
-      <p>
-        While you wait for the full movie to be released, you can watch the
-        trailer video to mildly experience the full version.
-      </p>
-      <p>
-        Once the countdown hits zero, refresh this page to watch the movie.
-      </p>
-      <h2>Full movie releasing in...</h2>
-      <span class="releasedIn"></span>
-      <hr />
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/jB9uFDXAj8E?si=J4WAhXASDuA-sDhh"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </body>
+  <link rel="stylesheet" href="/timeTo.css" />
+  <script src="/jquery.time-to.min.js" defer></script>
+
+  <script src="/script.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Mexico Vacation</h1>
+    <p>
+      In 2024, we went on a vacation to Mexico. Lots of it was filmed, and
+      Grant put it into one long movie.
+    </p>
+    <p>
+      The full movie will be released on April 1, 2024, at 7 pm pdt.
+    </p>
+    <p>
+      While you wait for the full movie to be released, you can watch the
+      trailer video to mildly experience the full version.
+    </p>
+    <p>
+      Once the countdown hits zero, refresh this page to watch the movie.
+    </p>
+    <h2>Full movie releasing in...</h2>
+    <h2 class="releasedIn"></h2>
+    <hr />
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/jB9uFDXAj8E?si=J4WAhXASDuA-sDhh"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <style>
+    iframe {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+  </style>
+  <script>
+    var countDownDate = new Date(
+      new Date("4/1/2024 7:00 PM").toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+      })
+    ).getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.querySelector(".releasedIn").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.querySelector(".releasedIn").innerHTML = "Try refreshing! It can take up to a few minutes to see the full movie.";
+      }
+    }, 1000);
+  </script>
+</body>
+
 </html>
